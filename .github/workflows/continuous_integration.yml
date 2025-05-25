@@ -24,10 +24,10 @@ jobs:
           distribution: "temurin"
           cache: maven
 
-      - name: Test with Maven
+      - name: Test Application
         run: mvn -B test
 
-      - name: Build with Maven
+      - name: Build Application
         run: mvn -B package -DskipTests
 
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
