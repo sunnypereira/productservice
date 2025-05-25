@@ -1,4 +1,4 @@
-name: Continuous Integration on Merge Request
+name: CI Merge Request
 
 on:
   pull_request:
