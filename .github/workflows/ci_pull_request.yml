@@ -15,17 +15,6 @@ jobs:
       - name: Set current date as env variable
         id: date_time
         run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
-      - name: Echo current date
-        run: echo $NOW
-
-      - name: Set some environment variables
-        run: |
-          echo "MY_VAR1=Hello" >> $GITHUB_ENV
-          echo "MY_VAR2=World" >> $GITHUB_ENV
-      - name: Print all environment variables
-        run: |
-          echo "All environment variables:"
-          env
 
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -42,4 +31,7 @@ jobs:
         run: mvn -B verify
 
       - name: Build container image
-        run: |
+        run: docker build -t shopzone/productservice:${GITHUB_SHA::7} .
+
+      - name: Show Docker Images
+        run: docker images -a
