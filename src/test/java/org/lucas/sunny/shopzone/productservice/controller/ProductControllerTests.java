@@ -32,11 +32,6 @@ public class ProductControllerTests extends BaseTestConfigurations {
 	}
 
 	@Test
-	void faliTest() {
-		assertFalse(true);
-	}
-
-	@Test
 	void shouldFindProductWithTitle() throws Exception {
 		// get a product
 		Product p = createProduct();
