@@ -39,6 +39,5 @@ jobs:
       - name: Build Container image
         run: |
           mvn clean package
-          echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
-          docker build -t shopzone/productservice:${GITHUB_SHA::7}-${env.NOW} .
+          docker build -t shopzone/productservice:${GITHUB_SHA::7}-${ENV.NOW} .
           docker images -a
