@@ -8,7 +8,7 @@ on:
 
 jobs:
   test_build:
-    name: Test and Build application Build container image
+    name: Test, Build application and container image
     runs-on: ubuntu-latest
 
     steps:
