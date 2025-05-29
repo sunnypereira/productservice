@@ -27,8 +27,17 @@ jobs:
       - name: Test Application
         run: mvn -B test
 
-      - name: Build Application
-        run: mvn -B package -DskipTests
+      - name: Build and analyze
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_ORGANIZATION: ${{vars.SONAR_ORGANIZATION}}
+          SONAR_HOST_URL: ${{vars.SONAR_HOST_URL}}
+          SONAR_PROJECTKEY: ${{vars.SONAR_PROJECTKEY}}
+
+        run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+
+      # - name: Build Application
+      #   run: mvn -B package -DskipTests
 
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
       #- name: Update dependency graph
