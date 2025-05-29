@@ -32,12 +32,13 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_ORGANIZATION: ${{vars.SONAR_ORGANIZATION}}
-          SONAR_HOST_URL: ${{vars.SONAR_HOST_URL}}
-          SONAR_PROJECTKEY: ${{vars.SONAR_PROJECTKEY}}
+          # SONAR_ORGANIZATION: ${{vars.SONAR_ORGANIZATION}}
+          # SONAR_HOST_URL: ${{vars.SONAR_HOST_URL}}
+          # SONAR_PROJECTKEY: ${{vars.SONAR_PROJECTKEY}}
 
         run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.organization=shopzone
+          -Dsonar.organization=${{vars.SONAR_ORGANIZATION}} \
+          -Dsonar.projectKey=${{vars.SONAR_PROJECTKEY}}
 
       # - name: Build Application
       #   run: mvn -B package -DskipTests
