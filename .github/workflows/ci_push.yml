@@ -32,9 +32,13 @@ jobs:
       #     -Dsonar.organization=shopzone \
       #     -Dsonar.projectKey=sunnypereira_shopzone
 
+      - name: Set current date as env variable
+        id: date_time
+        run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+
       - name: Build Container image
         run: |
           mvn clean package
           echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
-          docker build -t shopzone/productservice:${GITHUB_SHA::7}-${{env.NOW}} .
+          docker build -t shopzone/productservice:${GITHUB_SHA::7}-${env.NOW} .
           docker images -a
