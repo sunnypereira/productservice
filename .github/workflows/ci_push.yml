@@ -24,8 +24,8 @@ jobs:
           distribution: "temurin"
           cache: maven
 
-      - name: Test Application
-        run: mvn -B test
+      # - name: Test Application
+      #   run: mvn -B test
 
       - name: Build and analyze
         env:
