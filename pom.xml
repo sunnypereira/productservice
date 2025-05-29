@@ -114,9 +114,9 @@
 							<goal>report</goal>
 						</goals>
 						<configuration>
-							<includes>
+							<!-- <includes>
 								<include>org/lucas/sunny/shopzone/productservice/service/**</include>
-							</includes>
+							</includes> -->
 						</configuration>
 					</execution>
 					<execution>
@@ -127,20 +127,24 @@
                     <configuration>
                         <rules>
                             <rule>
-                                <limits>
+							<element>CLASS</element>
+                                <limits>								
                                     <limit>
-                                        <group>LINE</group>
+                                        <!-- <group>LINE</group> -->
                                         <value>COVEREDRATIO</value>
                                         <minimum>0.80</minimum> 
                                     </limit>
                                     <limit>
-                                        <group>BRANCH</group>
+                                        <!-- <group>BRANCH</group> -->
                                         <value>COVEREDRATIO</value>
                                         <minimum>0.90</minimum> 
                                     </limit>
                                 </limits>
                             </rule>
                         </rules>
+						<includes>
+							<include>org/lucas/sunny/shopzone/productservice/service/**</include>
+						</includes>
                     </configuration>
                 </execution>
 				</executions>
