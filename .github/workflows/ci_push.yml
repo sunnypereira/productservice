@@ -39,5 +39,5 @@ jobs:
       - name: Build Container image
         run: |
           mvn clean package
-          docker build -t shopzone/productservice:${GITHUB_SHA::7}-${ENV.NOW} .
+          docker build -t shopzone/productservice:${GITHUB_SHA::7}-$NOW .
           docker images -a
