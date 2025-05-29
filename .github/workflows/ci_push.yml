@@ -37,7 +37,6 @@ jobs:
           SONAR_PROJECTKEY: ${{vars.SONAR_PROJECTKEY}}
 
         run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=shopzone
 
       # - name: Build Application
