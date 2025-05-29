@@ -24,8 +24,3 @@ jobs:
 
       - name: Maven verify
         run: mvn -B verify
-
-      - name: Build container image
-        run: |
-          cd target
-          ls
