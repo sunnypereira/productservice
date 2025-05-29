@@ -34,7 +34,7 @@ jobs:
 
       - name: Set current date as env variable
         id: date_time
-        run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+        run: echo "NOW=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
 
       - name: Build Container image
         run: |
