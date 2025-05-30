@@ -24,20 +24,10 @@ jobs:
           distribution: "temurin"
           cache: maven
 
-      # - name: Build and analyze
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      #   run: |
-      #     mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-      #     -Dsonar.organization=shopzone \
-      #     -Dsonar.projectKey=sunnypereira_shopzone
-
-      - name: Set current date as env variable
-        id: date_time
-        run: echo "NOW=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
-
-      - name: Build Container image
+      - name: Build and analyze
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn clean package
-          docker build -t shopzone/productservice:${GITHUB_SHA::7}-$NOW .
-          docker images -a
+          mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Dsonar.organization=shopzone \
+          -Dsonar.projectKey=sunnypereira_shopzone
