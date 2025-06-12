@@ -31,6 +31,10 @@ jobs:
       #     -Dsonar.organization=shopzone \
       #     -Dsonar.projectKey=sunnypereira_shopzone
 
+      - name: Build
+        run: |
+          mvn clean package -DskipTests
+
       - name: Set current date as env variable
         id: date_time
         run: echo "NOW=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
@@ -52,6 +56,6 @@ jobs:
       - name: Login to ACR
         uses: docker/login-action@v3
         with:
-          registry: <registry-name>.azurecr.io
+          registry: ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io
           username: ${{ secrets.AZURE_CLIENT_ID }}
           password: ${{ secrets.AZURE_CLIENT_SECRET }}
