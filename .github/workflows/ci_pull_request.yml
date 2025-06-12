@@ -59,3 +59,8 @@ jobs:
           registry: ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io
           username: ${{ secrets.AZURE_CLIENT_ID }}
           password: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+      - name: Push Docker image to Azure Container Registry
+        run: |
+          docker tag shopzone/productservice:${GITHUB_SHA::7}-$NOW ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io/shopzone/productservice:${GITHUB_SHA::7}-$NOW
+          docker push ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io/shopzone/productservice:${GITHUB_SHA::7}-$NOW
