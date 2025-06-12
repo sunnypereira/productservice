@@ -23,17 +23,28 @@ jobs:
           distribution: "temurin"
           cache: maven
 
-      - name: Build and analyze
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.organization=shopzone \
-          -Dsonar.projectKey=sunnypereira_shopzone
+      # - name: Build and analyze
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   run: |
+      #     mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+      #     -Dsonar.organization=shopzone \
+      #     -Dsonar.projectKey=sunnypereira_shopzone
 
-      - name: Set current date as env variable
-        id: date_time
-        run: echo "NOW=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
+      # - name: Set current date as env variable
+      #   id: date_time
+      #   run: echo "NOW=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
 
-      - name: Build Container image
-        run: docker build -t shopzone/productservice:${GITHUB_SHA::7}-$NOW .
+      # - name: Build Container image
+      #   run: docker build -t shopzone/productservice:${GITHUB_SHA::7}-$NOW .
+
+      - uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Azure CLI script
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az account show
