@@ -31,20 +31,27 @@ jobs:
       #     -Dsonar.organization=shopzone \
       #     -Dsonar.projectKey=sunnypereira_shopzone
 
-      # - name: Set current date as env variable
-      #   id: date_time
-      #   run: echo "NOW=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
+      - name: Set current date as env variable
+        id: date_time
+        run: echo "NOW=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
 
-      # - name: Build Container image
-      #   run: docker build -t shopzone/productservice:${GITHUB_SHA::7}-$NOW .
+      - name: Build Container image
+        run: docker build -t shopzone/productservice:${GITHUB_SHA::7}-$NOW .
 
       - uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Azure CLI script
-        uses: azure/cli@v2
+      # - name: Azure CLI script
+      #   uses: azure/cli@v2
+      #   with:
+      #     azcliversion: latest
+      #     inlineScript: |
+      #       az account show
+
+      - name: Login to ACR
+        uses: docker/login-action@v3
         with:
-          azcliversion: latest
-          inlineScript: |
-            az account show
+          registry: <registry-name>.azurecr.io
+          username: ${{ secrets.AZURE_CLIENT_ID }}
+          password: ${{ secrets.AZURE_CLIENT_SECRET }}
