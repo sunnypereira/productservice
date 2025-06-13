@@ -62,5 +62,4 @@ jobs:
 
       - name: Push Docker image to Azure Container Registry
         run: |
-
-          docker push $${{ secrets.CONTAINER_REGISTRY_ADDRESS }}/shopzone/productservice:${GITHUB_SHA::7}-$NOW
+          docker push ${{ secrets.CONTAINER_REGISTRY_ADDRESS }}/shopzone/productservice:${GITHUB_SHA::7}-$NOW
