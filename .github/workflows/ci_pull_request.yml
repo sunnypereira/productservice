@@ -22,19 +22,13 @@ jobs:
           distribution: "temurin"
           cache: maven
 
-      # - name: Build and analyze
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      #   run: |
-      #     mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-      #     -Dsonar.organization=shopzone \
-      #     -Dsonar.projectKey=sunnypereira_shopzone
-
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn clean package -DskipTests
+          mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Dsonar.organization=shopzone \
+          -Dsonar.projectKey=sunnypereira_shopzone
 
       - name: Set current date as env variable
         id: date_time

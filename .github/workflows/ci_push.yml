@@ -1,10 +1,10 @@
 name: CI Push
 
 on:
-  # push:
-  #   branches-ignore:
-  #     - "main"
-  #     - "release*"
+  push:
+    branches-ignore:
+      - "main"
+      - "release*"
   workflow_dispatch:
 
 jobs:
