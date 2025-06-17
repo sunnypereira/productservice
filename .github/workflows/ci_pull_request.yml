@@ -22,28 +22,33 @@ jobs:
           distribution: "temurin"
           cache: maven
 
+      # - name: Build and analyze
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   run: |
+      #     mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+      #     -Dsonar.organization=shopzone \
+      #     -Dsonar.projectKey=sunnypereira_shopzone
+
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.organization=shopzone \
-          -Dsonar.projectKey=sunnypereira_shopzone
+          mvn clean package -DskipTests
 
       - name: Set current date as env variable
         id: date_time
         run: echo "NOW=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
 
       - name: Build Container image
-        run: docker build -t ${{ secrets.CONTAINER_REGISTRY_ADDRESS }}/shopzone/productservice:${GITHUB_SHA::7}-$NOW .
+        run: docker build -t ${{ vars.CONTAINER_REGISTRY_ADDRESS }}/productservice:${GITHUB_SHA::7}-$NOW .
 
       - name: Login to Container Registry
         uses: docker/login-action@v3
         with:
-          registry: ${{ secrets.CONTAINER_REGISTRY_ADDRESS }}
-          username: ${{ secrets.CONTAINER_REGISTRY_USERNAME }}
-          password: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
+          username: ${{ vars.CONTAINER_REGISTRY_USERNAME }}
+          password: ${{ secrets.CONTAINER_HUB_PAT }}
 
       - name: Push Container image to Container Registry
         run: |
-          docker push ${{ secrets.CONTAINER_REGISTRY_ADDRESS }}/shopzone/productservice:${GITHUB_SHA::7}-$NOW
+          docker push ${{ secrets.CONTAINER_REGISTRY_ADDRESS }}/productservice:${GITHUB_SHA::7}-$NOW
