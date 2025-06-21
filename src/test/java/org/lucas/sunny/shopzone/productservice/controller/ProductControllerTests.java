@@ -122,8 +122,7 @@ public class ProductControllerTests extends BaseTestConfigurations {
 		assertTrue(pagedContent.isFirst());
 		assertTrue(pagedContent.isLast());
 		assertFalse(pagedContent.isHasNext());
-		// assertFalse(pagedContent.isHasPrevious());
-		assertTrue(pagedContent.isHasPrevious());
+		assertFalse(pagedContent.isHasPrevious());
 	}
 
 	private Product createProduct() {
