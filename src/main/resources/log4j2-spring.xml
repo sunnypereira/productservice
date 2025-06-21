@@ -7,7 +7,7 @@
 				<pattern>
                 <!-- [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %c{10} - %msg%n -->
                 	%d{ISO8601} [%t] [%-5level] %c{30} - %msg%n
-                </pattern>>
+                </pattern>
 			</PatternLayout>
 		</Console>
 	</Appenders>

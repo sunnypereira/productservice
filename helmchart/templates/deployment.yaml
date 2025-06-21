@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: productservice-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: product-service
@@ -18,13 +18,6 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8081
-          # env:
-          #   - name: DB_URL
-          #     value: "{{ .Values.db.url }}"
-          #   - name: DB_USERNAME
-          #     value: "{{ .Values.db.username }}"
-          #   - name: DB_PASSWORD
-          #     value: "{{ .Values.db.password }}"
           volumeMounts:
             - name: config-volume
               mountPath: /appdir/config
