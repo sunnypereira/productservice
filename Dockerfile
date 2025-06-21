@@ -6,4 +6,4 @@ COPY target/*.jar app.jar
 RUN addgroup -S appuser && adduser -S appuser -G appuser
 USER appuser
 EXPOSE 8081
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","app.jar", "--spring.config.location=file:./config/"]
